@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Products - Mini Marketplace</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f8f9fa; }
+        nav { background: #343a40; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin-right: 16px; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .search-bar { display: flex; gap: 10px; margin-bottom: 24px; }
+        .search-bar input { flex: 1; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; }
+        .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .alert-success { background: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 16px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        .price { font-size: 1.2rem; font-weight: bold; color: #28a745; }
+        .badge { padding: 3px 8px; border-radius: 12px; font-size: 0.78rem; background: #e9ecef; }
+    </style>
+</head>
+<body>
+<nav>
+    <a th:href="@{/}" style="font-size:1.2rem; font-weight:bold;">🛒 Mini Marketplace</a>
+    <div>
+        <a th:href="@{/products}">Products</a>
+        <span sec:authorize="isAuthenticated()">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/auth/logout}">Logout (<span sec:authentication="name"></span>)</a>
+        </span>
+        <span sec:authorize="isAnonymous()">
+            <a th:href="@{/auth/login}">Login</a>
+            <a th:href="@{/auth/register}">Register</a>
+        </span>
+    </div>
+</nav>
+<div class="container">
+    <div th:if="${successMessage}" class="alert-success" th:text="${successMessage}"></div>
+    <h2>All Products</h2>
+    <form th:action="@{/products}" method="get" class="search-bar">
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="Search by name..."/>
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a th:href="@{/products}" class="btn" style="background:#6c757d;color:white;">Clear</a>
+    </form>
+    <sec:authorize access="hasRole('SELLER')">
+        <a th:href="@{/products/create}" class="btn btn-success" style="margin-bottom:16px;">+ Add Product</a>
+    </sec:authorize>
+    <div class="products-grid">
+        <div class="product-card" th:each="product : ${products}">
+            <h3 th:text="${product.name}">Product Name</h3>
+            <p th:text="${product.description}" style="color:#6c757d;font-size:0.9rem;">Description</p>
+            <p class="price" th:text="'$' + ${product.price}">$0.00</p>
+            <p>Stock: <span th:text="${product.stockQuantity}">0</span>
+               &nbsp;<span class="badge" th:text="${product.category}">Category</span></p>
+            <p style="font-size:0.8rem;color:#6c757d;">By: <span th:text="${product.sellerUsername}">seller</span></p>
+            <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">View</a>
+        </div>
+    </div>
+    <div th:if="${#lists.isEmpty(products)}" style="text-align:center;padding:40px;color:#6c757d;">
+        <p>No products found.</p>
+    </div>
+</div>
+</body>
+</html>

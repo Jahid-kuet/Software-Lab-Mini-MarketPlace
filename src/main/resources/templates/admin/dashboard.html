@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Mini Marketplace</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f8f9fa; }
+        nav { background: #343a40; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin-right: 16px; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 24px; border-radius: 8px;
+                     box-shadow: 0 1px 4px rgba(0,0,0,0.1); text-align: center; }
+        .stat-card h3 { margin: 0 0 8px 0; color: #6c757d; font-size: 0.9rem; text-transform: uppercase; }
+        .stat-card p { margin: 0; font-size: 2rem; font-weight: bold; color: #343a40; }
+        .nav-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .nav-card { background: white; padding: 24px; border-radius: 8px;
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.1); text-align: center; }
+        .nav-card a { text-decoration: none; color: #007bff; font-size: 1.1rem; font-weight: bold; }
+        .nav-card p { color: #6c757d; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+<nav>
+    <a th:href="@{/admin}" style="font-size:1.2rem; font-weight:bold;">🛒 Admin Panel</a>
+    <div>
+        <a th:href="@{/admin/users}">Users</a>
+        <a th:href="@{/admin/products}">Products</a>
+        <a th:href="@{/admin/orders}">Orders</a>
+        <a th:href="@{/auth/logout}">Logout</a>
+    </div>
+</nav>
+<div class="container">
+    <h2>Admin Dashboard</h2>
+    <div class="stats">
+        <div class="stat-card">
+            <h3>Total Users</h3>
+            <p th:text="${stats.totalUsers}">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Products</h3>
+            <p th:text="${stats.totalProducts}">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active Products</h3>
+            <p th:text="${stats.activeProducts}">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Orders</h3>
+            <p th:text="${stats.totalOrders}">0</p>
+        </div>
+    </div>
+    <div class="nav-cards">
+        <div class="nav-card">
+            <a th:href="@{/admin/users}">Manage Users</a>
+            <p>Enable/disable user accounts</p>
+        </div>
+        <div class="nav-card">
+            <a th:href="@{/admin/products}">Manage Products</a>
+            <p>Review and remove products</p>
+        </div>
+        <div class="nav-card">
+            <a th:href="@{/admin/orders}">Manage Orders</a>
+            <p>View and update order statuses</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

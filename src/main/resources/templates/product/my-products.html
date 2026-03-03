@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Products - Mini Marketplace</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f8f9fa; }
+        nav { background: #343a40; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin-right: 16px; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .btn { padding: 8px 14px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; font-size:0.9rem; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-danger  { background: #dc3545; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .alert-success { background: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; background: white;
+                border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #dee2e6; }
+        th { background: #343a40; color: white; }
+    </style>
+</head>
+<body>
+<nav>
+    <a th:href="@{/}" style="font-size:1.2rem; font-weight:bold;">🛒 Mini Marketplace</a>
+    <div>
+        <a th:href="@{/products}">Browse</a>
+        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/auth/logout}">Logout</a>
+    </div>
+</nav>
+<div class="container">
+    <div th:if="${successMessage}" class="alert-success" th:text="${successMessage}"></div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h2>My Products</h2>
+        <a th:href="@{/products/create}" class="btn btn-success">+ Add New Product</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th><th>Category</th><th>Price</th>
+                <th>Stock</th><th>Status</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}">Name</td>
+                <td th:text="${product.category}">Cat</td>
+                <td th:text="'$' + ${product.price}">$0</td>
+                <td th:text="${product.stockQuantity}">0</td>
+                <td>
+                    <span th:if="${product.active}"
+                          style="color:#28a745; font-weight:bold;">Active</span>
+                    <span th:unless="${product.active}"
+                          style="color:#dc3545; font-weight:bold;">Inactive</span>
+                </td>
+                <td>
+                    <a th:href="@{/products/{id}/edit(id=${product.id})}"
+                       class="btn btn-warning">Edit</a>
+                    <form th:action="@{/products/{id}/delete(id=${product.id})}"
+                          method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Delete this product?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:if="${#lists.isEmpty(products)}" style="text-align:center;padding:40px;color:#6c757d;">
+        <p>You have no products yet. <a th:href="@{/products/create}">Create one!</a></p>
+    </div>
+</div>
+</body>
+</html>
