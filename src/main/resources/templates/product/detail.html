@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail - Mini Marketplace</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f8f9fa; }
+        nav { background: #343a40; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin-right: 16px; }
+        .container { max-width: 700px; margin: 40px auto; padding: 0 20px; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        .price { font-size: 1.8rem; font-weight: bold; color: #28a745; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+    </style>
+</head>
+<body>
+<nav>
+    <a th:href="@{/}" style="font-size:1.2rem; font-weight:bold;">🛒 Mini Marketplace</a>
+    <div>
+        <a th:href="@{/products}">Products</a>
+        <span sec:authorize="isAuthenticated()">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/auth/logout}">Logout</a>
+        </span>
+        <span sec:authorize="isAnonymous()">
+            <a th:href="@{/auth/login}">Login</a>
+        </span>
+    </div>
+</nav>
+<div class="container">
+    <div class="card">
+        <h2 th:text="${product.name}">Product Name</h2>
+        <p th:text="${product.description}" style="color:#6c757d;">Description</p>
+        <p class="price" th:text="'$' + ${product.price}">$0.00</p>
+        <p>Category: <strong th:text="${product.category}">-</strong></p>
+        <p>Stock Available: <strong th:text="${product.stockQuantity}">0</strong></p>
+        <p>Seller: <strong th:text="${product.sellerUsername}">seller</strong></p>
+        <div style="margin-top:20px;">
+            <sec:authorize access="hasRole('BUYER')">
+                <a th:href="@{/orders/checkout}" class="btn btn-primary">Buy Now</a>
+            </sec:authorize>
+            <a th:href="@{/products}" class="btn btn-secondary" style="margin-left:10px;">← Back</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

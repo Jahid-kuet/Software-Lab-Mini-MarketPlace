@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Error - Mini Marketplace</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center;
+               padding: 80px; background: #f8f9fa; margin: 0; }
+        .container { background: white; padding: 40px; border-radius: 8px;
+                     display: inline-block; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #dc3545; font-size: 4rem; margin: 0; }
+        h2 { color: #343a40; }
+        p  { color: #6c757d; }
+        a  { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>500</h1>
+    <h2>Internal Server Error</h2>
+    <p>Something went wrong on our end. Please try again later.</p>
+    <a th:href="@{/}">← Go to Home</a>
+</div>
+</body>
+</html>
