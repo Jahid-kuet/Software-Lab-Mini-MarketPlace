@@ -51,6 +51,9 @@ public class SecurityConfig {
         http
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
+                // Seller only
+                .requestMatchers("/products/my", "/products/create", "/products/{id}/edit", "/products/{id}/delete").hasRole("SELLER")
+
                 // Public endpoints
                 .requestMatchers(
                     "/",
