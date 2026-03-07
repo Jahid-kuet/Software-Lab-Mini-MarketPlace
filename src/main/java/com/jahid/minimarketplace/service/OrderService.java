@@ -123,6 +123,13 @@ public class OrderService {
         return mapToDTO(orderRepository.save(order));
     }
 
+        @Transactional
+        public void deleteOrder(Long id) {
+                Order order = orderRepository.findById(id)
+                                .orElseThrow(() -> new ResourceNotFoundException("Order not found with id: " + id));
+                orderRepository.delete(order);
+        }
+
     // ===== Mapper =====
     public OrderDTO mapToDTO(Order order) {
         List<OrderDTO.OrderItemDTO> itemDTOs = order.getOrderItems().stream()

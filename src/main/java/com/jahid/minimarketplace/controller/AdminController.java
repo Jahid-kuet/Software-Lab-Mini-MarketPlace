@@ -114,6 +114,14 @@ public class AdminController {
         return ResponseEntity.ok(ApiResponse.success("Order status updated", updated));
     }
 
+    // ===== REST API: DELETE order =====
+    @DeleteMapping("/api/orders/{id}")
+    @ResponseBody
+    public ResponseEntity<ApiResponse<Void>> deleteOrderApi(@PathVariable Long id) {
+        adminService.removeOrder(id);
+        return ResponseEntity.ok(ApiResponse.success("Order removed successfully"));
+    }
+
     // ===== REST API: DELETE product =====
     @DeleteMapping("/api/products/{id}")
     @ResponseBody

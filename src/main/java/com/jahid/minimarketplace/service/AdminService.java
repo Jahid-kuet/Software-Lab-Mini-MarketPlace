@@ -60,6 +60,11 @@ public class AdminService {
         return orderService.updateOrderStatus(orderId, status);
     }
 
+    @Transactional
+    public void removeOrder(Long orderId) {
+        orderService.deleteOrder(orderId);
+    }
+
     @Transactional(readOnly = true)
     public DashboardStats getDashboardStats() {
         return DashboardStats.builder()
