@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied - Mini Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex;
+               justify-content: center; align-items: center;
+               background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+               padding: 20px; }
+        .error-card { background: white; padding: 60px 48px; border-radius: 24px;
+                      text-align: center; max-width: 480px; width: 100%;
+                      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+                      animation: fadeInUp 0.5s ease-out; }
+        .error-icon { width: 80px; height: 80px; border-radius: 50%;
+                      background: #fee2e2; display: flex; align-items: center;
+                      justify-content: center; margin: 0 auto 24px;
+                      font-size: 2rem; color: #ef4444; }
+        .error-code { font-size: 5rem; font-weight: 900; line-height: 1;
+                      background: linear-gradient(135deg, #ef4444, #dc2626);
+                      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+                      margin-bottom: 8px; }
+        h2 { font-size: 1.4rem; font-weight: 700; color: #0f172a; margin-bottom: 12px; }
+        p { color: #64748b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px;
+               padding: 12px 28px; border-radius: 12px; text-decoration: none;
+               font-weight: 600; font-size: 0.95rem; transition: all 0.2s;
+               background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
+        .btn:hover { transform: translateY(-2px);
+                     box-shadow: 0 8px 25px rgba(99,102,241,0.4); }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); }
+                              to { opacity:1; transform:translateY(0); } }
+    </style>
+</head>
+<body>
+<div class="error-card">
+    <div class="error-icon"><i class="fas fa-lock"></i></div>
+    <div class="error-code">403</div>
+    <h2>Access Denied</h2>
+    <p>You don't have permission to access this page. Please contact an administrator if you believe this is a mistake.</p>
+    <a th:href="@{/dashboard}" class="btn"><i class="fas fa-arrow-left"></i> Go to Dashboard</a>
+</div>
+</body>
+</html>

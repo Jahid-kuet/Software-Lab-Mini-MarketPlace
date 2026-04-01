@@ -23,7 +23,8 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private OrderStatus status;
+    @Builder.Default
+    private OrderStatus status = OrderStatus.PENDING;
 
     @Column(nullable = false)
     private BigDecimal totalAmount;
@@ -39,7 +40,7 @@ public class Order {
         }
     }
 
-    // Order (M:1) User — buyer places order
+    // Order (M:1) User — buyer places this order
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;

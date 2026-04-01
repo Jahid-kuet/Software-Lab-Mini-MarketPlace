@@ -35,6 +35,7 @@ public class Product {
 
     private String category;
 
+    @Builder.Default
     private boolean active = true;
 
     @Column(updatable = false)
@@ -45,7 +46,7 @@ public class Product {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Product (M:1) User — seller owns product
+    // Product (M:1) User — seller owns this product
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
