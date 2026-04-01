@@ -70,6 +70,8 @@ This will execute all tests located in the `src/test/java/` directory and displa
 run the following command  in terminal(Windows)  - 
 docker run -it --rm -v ${PWD}:/app -w /app maven:3.9-eclipse-temurin-17 mvn test
 
+After running the command you may see somehting named "SUCCESS" meaning the tests passed 
+
 
 ## 📁 Project Structure highlights
 
