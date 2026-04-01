@@ -38,14 +38,14 @@ public class SecurityConfig {
         return provider;
     }
 
-    // ===== Authentication Manager =====
+    /*Auth Manager  */
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    // ===== Security Filter Chain =====
+    /*Security Filter Chain */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
