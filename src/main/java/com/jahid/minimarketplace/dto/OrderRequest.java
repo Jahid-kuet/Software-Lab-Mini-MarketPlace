@@ -9,6 +9,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
+// Order Request DTO for creating new orders
 public class OrderRequest {
 
     @NotEmpty(message = "Order must contain at least one item")
