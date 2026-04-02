@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Data
 @Builder
+// User Data Transfer Object (DTO) for API responses
 public class UserDTO {
 
     private Long id;
