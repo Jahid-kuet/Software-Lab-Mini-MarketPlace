@@ -37,3 +37,4 @@ src/main/resources/application.properties
 
 .env
 
+z_test_run_docker_command_linux.txt
