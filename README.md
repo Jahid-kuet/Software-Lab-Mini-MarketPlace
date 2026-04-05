@@ -321,9 +321,13 @@ This keeps the main branch guarded by the same build-and-test flow used in the r
 
 ### CD
 
-Automated deployment is not implemented in the repository yet. The project already has a `Dockerfile` and a `docker-compose.yml`, so the application is prepared for containerized deployment, but there is currently no GitHub Actions workflow that builds, publishes, or deploys release artifacts automatically.
+Continuous delivery is handled through Render. The GitHub repository is connected to a Render web service, and Render builds and deploys the application using this project's `Dockerfile`. When new changes are pushed to the connected branch, Render redeploys the latest version of the service.
 
-Once deployment is added, this section can be expanded with the actual release flow instead of a placeholder description.
+Live application URL:
+
+- `https://software-lab-mini-marketplace.onrender.com`
+
+This keeps the application publicly accessible while CI remains in GitHub Actions and deployment is handled by Render.
 
 ## Project Structure
 

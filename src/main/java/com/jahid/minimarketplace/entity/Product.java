@@ -51,7 +51,7 @@ public class Product {
     @JoinColumn(name = "seller_id", nullable = false)
     private User seller;
 
-    // Product (1:M) OrderItem
+    // Product (1:M) one product can appear in many order items
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<OrderItem> orderItems = new HashSet<>();

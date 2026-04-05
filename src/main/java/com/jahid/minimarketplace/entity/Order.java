@@ -40,12 +40,12 @@ public class Order {
         }
     }
 
-    // Order (M:1) User — buyer places this order
+    // Order (M:1) User — many buyers place this order
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;
 
-    // Order (1:M) OrderItem
+    // Order (1:M) one order contains many order items
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
     private List<OrderItem> orderItems = new ArrayList<>();

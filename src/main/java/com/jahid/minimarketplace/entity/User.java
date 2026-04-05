@@ -44,6 +44,7 @@ public class User {
     }
 
     // User (M:M) Role
+    //A user can have many roles, and a role can belong to many users
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -53,12 +54,12 @@ public class User {
     @Builder.Default
     private Set<Role> roles = new HashSet<>();
 
-    // User (1:M) Product — seller owns products
+    // User (1:M) Product — one seller owns many  products
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<Product> products = new HashSet<>();
 
-    // User (1:M) Order — buyer places orders
+    // User (1:M) Order — one buyer places many orders
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     private Set<Order> orders = new HashSet<>();
